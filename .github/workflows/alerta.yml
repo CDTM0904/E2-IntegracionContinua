@@ -1,0 +1,23 @@
+yaml
+name: Notificación a ntfy.sh
+
+on:
+push:
+branches:
+- main
+
+jobs:
+notificar:
+runs-on: ubuntu-latest
+
+
+steps:
+- name: Checkout del repositorio
+  uses: actions/checkout@v3
+
+- name: Enviar notificación a ntfy.sh
+  run: |
+    curl -X POST https://ntfy.sh/devops-itla \
+      -H "Title: 🚀 Código nuevo en main" \
+      -H "Priority: 4" \
+      -d "El repositorio recibió un nuevo push en la rama main. ¡Revisar los cambios!"
